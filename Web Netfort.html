@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetFort Casino</title>
+    <style>
+.roulette-game {
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #1a252f;
+    border-radius: 10px;
+    color: #f39c12;
+    text-align: center;
+    max-width: 500px;
+}
+
+.roulette-wheel {
+    width: 300px;
+    height: 300px;
+    border: 10px solid #f39c12;
+    border-radius: 50%;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.roulette-wheel #wheel {
+    width: 100%;
+    height: 100%;
+    background-image: conic-gradient(
+        red 0deg, red 10deg, black 10deg, black 20deg,
+        red 20deg, red 30deg, black 30deg, black 40deg,
+        red 40deg, red 50deg, black 50deg, black 60deg,
+        red 60deg, red 70deg, black 70deg, black 80deg,
+        red 80deg, red 90deg, black 90deg, black 100deg
+    );
+    transform: rotate(0deg);
+    transform-origin: center;
+    transition: transform 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.roulette-controls {
+    margin-top: 20px;
+}
+
+.roulette-controls input, .roulette-controls select {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2c3e50;
+            color: #f39c12;
+        }
+
+        header {
+            background-color: #1a252f;
+            color: #f39c12;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #1a252f;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #f39c12;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        .banner {
+            background-image: url('images/casino.jpg');
+            background-size: cover;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content h2 {
+            color: #f39c12;
+        }
+
+        .content p {
+            color: #ecf0f1;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .content img {
+            display: block;
+            margin: 20px auto;
+            width: 50%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #1a252f;
+            color: #f39c12;
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .button {
+            background-color: #f39c12;
+            color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #e67e22;
+        }
+
+        .games-section {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        #floating-bot {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 100px;
+            background-color: #1a252f;
+            border: 2px solid #f39c12;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        #floating-bot img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        #bot-text {
+            margin-top: 5px;
+            color: #f39c12;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado del casino -->
+    <header>
+        <h1>NetFort Casino</h1>
+        <p>¡Donde la seguridad y la diversión se encuentran!</p>
+    </header>
+
+    <!-- Información del usuario -->
+    <div id="user-info"></div>
+
+    <!-- Menú de navegación -->
+    <nav>
+        <a href="#" onclick="showSection('main')">Inicio</a>
+        <a href="#juegos" onclick="showSection('games')">Juegos</a>
+        <a href="#tecnologia" onclick="showSection('tech')">Tecnología</a>
+        <a href="#contacto" onclick="showSection('contact')">Contacto</a>
+    </nav>
+
+    <!-- Imagen principal (banner) -->
+    <div class="banner">
+        <h1>Bienvenidos a NetFort Casino</h1>
+    </div>
+
+    <!-- Sección principal -->
+    <div class="content active" id="main">
+        <h2>Sobre Nosotros</h2>
+        <p>
+            NetFort Casino te ofrece una experiencia única de juegos de azar con las mejores tecnologías para garantizar 
+            no solo diversión, sino también un ambiente seguro y protegido. Disfruta de nuestras tragamonedas, mesas de póker y juegos en vivo en un entorno que prioriza la seguridad tanto física como digital.
+        </p>
+        <img src="C:\Users\aydan\Downloads\proyecto imagenes\imagenes\Netfort.png" alt="Imagen del Casino" />
+    </div>
+
+    <!-- Sección de tecnología -->
+    <div class="content" id="tech">
+        <h2>Infraestructura Tecnológica</h2>
+        <p>
+            En NetFort Casino, contamos con una red avanzada y segura para garantizar una experiencia fluida y confiable. 
+            Nuestra infraestructura incluye:
+        </p>
+        <ul>
+            <li>Segmentación de red mediante VLANs para separar áreas operativas y públicas.</li>
+            <li>Firewalls y sistemas de detección de intrusiones (IDS/IPS).</li>
+            <li>Monitoreo continuo para proteger contra ciberamenazas.</li>
+            <li>Cámaras de vigilancia en toda la instalación.</li>
+        </ul>
+    </div>
+
+    <!-- Sección de juegos -->
+    <div class="games-section" id="games">
+<div class="roulette-game">
+    <h3>Juego de Ruleta</h3>
+    <div class="roulette-wheel">
+        <div id="wheel"></div>
+    </div>
+    <div class="roulette-controls">
+        <label for="bet-type">Elige tu apuesta:</label>
+        <select id="bet-type">
+            <option value="color-red">Color: Rojo</option>
+            <option value="color-black">Color: Negro</option>
+            <option value="number">Número</option>
+        </select>
+        <input type="number" id="bet-number" placeholder="Número (0-36)" style="display: none;" />
+        <button onclick="spinRoulette()">Girar</button>
+    </div>
+    <p id="roulette-result" style="margin-top: 10px;"></p>
+</div>
+        <h2>Juegos de Casino</h2>
+        <div class="slot-machine">
+            <h3>Máquinas Tragamonedas</h3>
+            <p>Presiona el botón para girar y prueba tu suerte.</p>
+            <div id="slot-result" style="font-size: 24px; margin: 10px 0;">🎰 🎰 🎰</div>
+            <button onclick="playSlotMachine()">Girar</button>
+        </div>
+    </div>
+
+    <!-- Sección de contacto -->
+    <div class="content" id="contact">
+        <h2>Contacto</h2>
+        <p>¿Tienes preguntas o necesitas ayuda? Contáctanos en cualquier momento.</p>
+        <p>Email: soporte@netfortcasino.com</p>
+        <p>Teléfono: 320 4612146</p>
+    </div>
+
+    <!-- Formulario de registro/inicio de sesión -->
+    <div class="form-container" id="auth">
+        <h2>Registrarse / Iniciar Sesión</h2>
+        <input type="text" id="username" placeholder="Usuario">
+        <button onclick="register()">Registrarse</button>
+        <button onclick="login()">Iniciar Sesión</button>
+    </div>
+
+    <!-- Bot flotante -->
+   <div id="floating-bot">
+    <a href="https://bot.writesonic.com/share/bot/c920e4b6-ae95-408b-97f3-2d2aaa594981" target="_blank">
+        <img src="C:\Users\aydan\Downloads\proyecto imagenes\imagenes\Netfort.png" alt="Bot">
+    </a>
+    <div id="bot-text">Asistente</div>
+</div>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 NetFort Casino - Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+function spinRoulette() {
+    const wheel = document.getElementById('wheel');
+    const resultText = document.getElementById('roulette-result');
+    const betType = document.getElementById('bet-type').value;
+    const betNumber = document.getElementById('bet-number').value;
+
+    const randomSpin = Math.floor(Math.random() * 360);
+    const numberResult = Math.floor(randomSpin / 10);
+    const colorResult = (numberResult % 2 === 0) ? 'Rojo' : 'Negro';
+
+    wheel.style.transform = `rotate(${3600 + randomSpin}deg)`;
+
+    setTimeout(() => {
+        let message;
+        if (betType === 'color-red' && colorResult === 'Rojo') {
+            message = "🎉 ¡Ganaste! El color fue Rojo.";
+            currentUser.balance += 50;
+        } else if (betType === 'color-black' && colorResult === 'Negro') {
+            message = "🎉 ¡Ganaste! El color fue Negro.";
+            currentUser.balance += 50;
+        } else if (betType === 'number' && parseInt(betNumber) === numberResult) {
+            message = `🎉 ¡Ganaste! El número fue ${numberResult}.`;
+            currentUser.balance += 100;
+        } else {
+            message = `😢 Perdiste. El número fue ${numberResult} (${colorResult}).`;
+            currentUser.balance -= 10;
+        }
+        resultText.textContent = message;
+        updateUI();
+    }, 3000);
+}
+
+document.getElementById('bet-type').addEventListener('change', function() {
+    const betNumberInput = document.getElementById('bet-number');
+    if (this.value === 'number') {
+        betNumberInput.style.display = 'inline-block';
+    } else {
+        betNumberInput.style.display = 'none';
+    }
+});
+
+        let users = {};
+        let currentUser = null;
+
+        function register() {
+            const username = document.getElementById("username").value.trim();
+            if (!username) {
+                alert("Por favor, ingrese un nombre de usuario.");
+                return;
+            }
+            if (users[username]) {
+                alert("Este usuario ya existe. Por favor, inicie sesión.");
+                return;
+            }
+            users[username] = { balance: 100 };
+            alert("¡Usuario registrado exitosamente!");
+        }
+
+        function login() {
+            const username = document.getElementById("username").value.trim();
+            if (!username) {
+                alert("Por favor, ingrese un nombre de usuario.");
+                return;
+            }
+            if (!users[username]) {
+                alert("Usuario no encontrado. Por favor, registrese.");
+                return;
+            }
+            currentUser = users[username];
+            updateUI();
+        }
+
+        function updateUI() {
+            if (currentUser) {
+                document.getElementById("auth").style.display = "none";
+                document.getElementById("user-info").textContent = `Bienvenido, ${Object.keys(users).find(key => users[key] === currentUser)}. Saldo: $${currentUser.balance}`;
+                document.getElementById("games").classList.add("active");
+            } else {
+                document.getElementById("auth").style.display = "block";
+                document.getElementById("games").classList.remove("active");
+            }
+        }
+
+
+        function playSlotMachine() {
+            if (!currentUser || currentUser.balance <= 0) {
+                alert("No puedes jugar. Regístrate, inicia sesión o recarga saldo.");
+                return;
+            }
+            const symbols = ["🍒", "🍋", "🍉", "⭐", "🎲", "🔔"];
+            const result = [
+                symbols[Math.floor(Math.random() * symbols.length)],
+                symbols[Math.floor(Math.random() * symbols.length)],
+                symbols[Math.floor(Math.random() * symbols.length)],
+            ];
+            document.getElementById("slot-result").textContent = result.join(" ");
+            if (result[0] === result[1] && result[1] === result[2]) {
+                alert("¡Felicidades! Has ganado $50.");
+                currentUser.balance += 50;
+            } else {
+                alert("Mejor suerte la próxima vez.");
+                currentUser.balance -= 10;
+            }
+            updateUI();
+        }
+    </script>
+</body>
+</html>
